@@ -37,7 +37,7 @@ public class ConsumerController {
 
     @RequestMapping("/sayhello1")
     public String sayHello() {
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://PROVIDER/hello/{1}", String.class, "张三");
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://PROVIDER/hello1/{1}", String.class, "张三");
         return responseEntity.getBody();
     }
 
@@ -45,7 +45,7 @@ public class ConsumerController {
     public String sayHello2(@PathVariable("name") String name) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://PROVIDER/hello/{name}", String.class, map);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://PROVIDER/hello1/{name}", String.class, map);
         return responseEntity.getBody();
     }
 
@@ -53,7 +53,7 @@ public class ConsumerController {
     public String sayHello3(@RequestParam(name = "name") String name) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://PROVIDER/hello?name={name}", String.class, map);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://PROVIDER/hello1?name={name}", String.class, map);
         return responseEntity.getBody();
     }
 }

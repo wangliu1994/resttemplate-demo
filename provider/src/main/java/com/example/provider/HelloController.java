@@ -19,8 +19,18 @@ public class HelloController {
     @Autowired
     private DiscoveryClient client;
 
-    //---> /hello/winnie
-    @RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
+    //---> /hello
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello() {
+        List<ServiceInstance> instances = client.getInstances("test-service");
+        for (ServiceInstance instance : instances) {
+            logger.info("/hello,host:" + instance.getHost() + ",service_id:" + instance.getServiceId());
+        }
+        return "Hello World";
+    }
+
+    //---> /hello1/winnie
+    @RequestMapping(value = "/hello1/{name}", method = RequestMethod.GET)
     public String hello1(@PathVariable("name") String name) {
         List<ServiceInstance> instances = client.getInstances("test-service");
         for (ServiceInstance instance : instances) {
@@ -33,8 +43,8 @@ public class HelloController {
         }
     }
 
-    //---> /hello?name=winnie
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    //---> /hello1?name=winnie
+    @RequestMapping(value = "/hello1", method = RequestMethod.GET)
     public String hello2(@RequestParam(name = "name") String name) {
         List<ServiceInstance> instances = client.getInstances("test-service");
         for (ServiceInstance instance : instances) {
