@@ -2,6 +2,7 @@ package com.example.consumer;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.winnie.Book;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -12,14 +13,15 @@ import org.springframework.web.client.RestTemplate;
 public class BookCommand extends HystrixCommand<Book> {
     private RestTemplate restTemplate;
 
-    protected BookCommand(Setter setter, RestTemplate restTemplate) {
+    public BookCommand(Setter setter, RestTemplate restTemplate) {
         super(setter);
         this.restTemplate = restTemplate;
     }
 
     @Override
-    protected Book run() throws Exception {
-        return null;
+    protected Book run() {
+        ResponseEntity<Book> responseEntity = restTemplate.getForEntity("http://PROVIDER/getBook1", Book.class);
+        return responseEntity.getBody();
     }
 
     @Override
