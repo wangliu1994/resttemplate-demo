@@ -1,4 +1,4 @@
-package com.example.consumer;
+package com.example.consumer.controller;
 
 import com.winnie.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.Map;
  * @desc
  */
 @RestController
-public class ConsumerController {
+public class HelloController {
     @Autowired
     RestTemplate restTemplate;
 
@@ -66,12 +66,6 @@ public class ConsumerController {
         UriComponents uriComponents = UriComponentsBuilder.fromUriString("http://PROVIDER/hello1?name={name}").build().expand("王五").encode();
         URI uri = uriComponents.toUri();
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(uri, String.class);
-        return responseEntity.getBody();
-    }
-
-    @RequestMapping("/getBook1")
-    public Book getBook() {
-        ResponseEntity<Book> responseEntity = restTemplate.getForEntity("http://PROVIDER/getBook1", Book.class);
         return responseEntity.getBody();
     }
 }
