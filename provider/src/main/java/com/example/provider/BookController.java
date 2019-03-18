@@ -16,4 +16,9 @@ public class BookController {
     public Book getBook(){
         return new Book("三国演义", 90, "罗贯中", "花城出版社");
     }
+
+    @GetMapping("error")
+    public Book getBookError(){
+        return new Book("getBookError", 0, "getBookError", "getBookError");
+    }
 }
