@@ -22,7 +22,7 @@ public class HelloController {
     //---> /hello
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
-        List<ServiceInstance> instances = client.getInstances("test-service");
+        List<ServiceInstance> instances = client.getInstances("provider");
         for (ServiceInstance instance : instances) {
             logger.info("/hello,host:" + instance.getHost() + ",service_id:" + instance.getServiceId());
         }
@@ -32,7 +32,7 @@ public class HelloController {
     //---> /hello1/winnie
     @RequestMapping(value = "/hello1/{name}", method = RequestMethod.GET)
     public String hello1(@PathVariable("name") String name) {
-        List<ServiceInstance> instances = client.getInstances("test-service");
+        List<ServiceInstance> instances = client.getInstances("provider");
         for (ServiceInstance instance : instances) {
             logger.info("/hello,host:" + instance.getHost() + ",service_id:" + instance.getServiceId());
         }
@@ -46,7 +46,7 @@ public class HelloController {
     //---> /hello1?name=winnie
     @RequestMapping(value = "/hello1", method = RequestMethod.GET)
     public String hello2(@RequestParam(name = "name") String name) {
-        List<ServiceInstance> instances = client.getInstances("test-service");
+        List<ServiceInstance> instances = client.getInstances("provider");
         for (ServiceInstance instance : instances) {
             logger.info("/hello,host:" + instance.getHost() + ",service_id:" + instance.getServiceId());
         }
